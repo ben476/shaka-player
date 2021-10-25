@@ -262,7 +262,7 @@ shakaDemo.AssetCard = class {
       attachPoint.classList.add('asset-card-corner-button');
       const icon = document.createElement('i');
       icon.textContent = iconText;
-      icon.classList.add('material-icons-round');
+      icon.classList.add('material-icons');
       button.appendChild(icon);
     };
 

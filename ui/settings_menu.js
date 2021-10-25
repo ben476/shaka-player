@@ -52,7 +52,7 @@ shaka.ui.SettingsMenu = class extends shaka.ui.Element {
 
     /** @protected {!HTMLElement}*/
     this.icon = shaka.util.Dom.createHTMLElement('i');
-    this.icon.classList.add('material-icons-round');
+    this.icon.classList.add('material-icons');
     this.icon.textContent = iconText;
     this.button.appendChild(this.icon);
 
@@ -92,7 +92,7 @@ shaka.ui.SettingsMenu = class extends shaka.ui.Element {
     });
 
     const backIcon = shaka.util.Dom.createHTMLElement('i');
-    backIcon.classList.add('material-icons-round');
+    backIcon.classList.add('material-icons');
     backIcon.textContent = shaka.ui.Enums.MaterialDesignIcons.CLOSE;
     this.backButton.appendChild(backIcon);
 

@@ -566,7 +566,7 @@ shaka.ui.Controls = class extends shaka.util.FakeEventTarget {
         if (document.pictureInPictureElement) {
           await document.exitPictureInPicture();
         }
-        await this.videoContainer_.requestFullscreen({navigationUI: 'hide'});
+        await document.documentElement.requestFullscreen({navigationUI: 'hide'});
         if (this.config_.forceLandscapeOnFullscreen && screen.orientation) {
           try {
             // Locking to 'landscape' should let it be either
@@ -933,19 +933,19 @@ shaka.ui.Controls = class extends shaka.util.FakeEventTarget {
       this.onPlayStateChange_();
     });
 
-    this.eventManager_.listen(this.videoContainer_, 'mousemove', (e) => {
+    this.eventManager_.listen(document, 'mousemove', (e) => {
       this.onMouseMove_(e);
     });
 
-    this.eventManager_.listen(this.videoContainer_, 'touchmove', (e) => {
+    this.eventManager_.listen(document, 'touchmove', (e) => {
       this.onMouseMove_(e);
     }, {passive: true});
 
-    this.eventManager_.listen(this.videoContainer_, 'touchend', (e) => {
+    this.eventManager_.listen(document, 'touchend', (e) => {
       this.onMouseMove_(e);
     }, {passive: true});
 
-    this.eventManager_.listen(this.videoContainer_, 'mouseleave', () => {
+    this.eventManager_.listen(document, 'mouseleave', () => {
       this.onMouseLeave_();
     });
 
@@ -953,11 +953,11 @@ shaka.ui.Controls = class extends shaka.util.FakeEventTarget {
       this.onCastStatusChange_();
     });
 
-    this.eventManager_.listen(this.videoContainer_, 'keydown', (e) => {
+    this.eventManager_.listen(document, 'keydown', (e) => {
       this.onControlsKeyDown_(/** @type {!KeyboardEvent} */(e));
     });
 
-    this.eventManager_.listen(this.videoContainer_, 'keyup', (e) => {
+    this.eventManager_.listen(document, 'keyup', (e) => {
       this.onControlsKeyUp_(/** @type {!KeyboardEvent} */(e));
     });
 
@@ -1002,7 +1002,7 @@ shaka.ui.Controls = class extends shaka.util.FakeEventTarget {
 
     if (screen.orientation.type.includes('landscape') &&
         !document.fullscreenElement) {
-      await this.videoContainer_.requestFullscreen({navigationUI: 'hide'});
+      await document.documentElement.requestFullscreen({navigationUI: 'hide'});
     } else if (screen.orientation.type.includes('portrait') &&
         document.fullscreenElement) {
       await document.exitFullscreen();
@@ -1217,8 +1217,6 @@ shaka.ui.Controls = class extends shaka.util.FakeEventTarget {
     const activeElement = document.activeElement;
     const isVolumeBar = activeElement && activeElement.classList ?
         activeElement.classList.contains('shaka-volume-bar') : false;
-    const isSeekBar = activeElement && activeElement.classList &&
-        activeElement.classList.contains('shaka-seek-bar');
     // Show the control panel if it is on focus or any button is pressed.
     if (this.controlsContainer_.contains(activeElement)) {
       this.onMouseMove_(event);
@@ -1259,7 +1257,7 @@ shaka.ui.Controls = class extends shaka.util.FakeEventTarget {
         break;
       // Pause or play by pressing space on the seek bar.
       case ' ':
-        if (isSeekBar) {
+        if (this.seekBar_) {
           this.onPlayPauseClick_();
         }
         break;

@@ -46,7 +46,7 @@ shaka.ui.CastButton = class extends shaka.ui.Element {
 
     /** @private {!HTMLElement} */
     this.castIcon_ = shaka.util.Dom.createHTMLElement('i');
-    this.castIcon_.classList.add('material-icons-round');
+    this.castIcon_.classList.add('material-icons');
     this.castIcon_.textContent = shaka.ui.Enums.MaterialDesignIcons.CAST;
     this.castButton_.appendChild(this.castIcon_);
 

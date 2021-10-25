@@ -143,7 +143,7 @@ shakaDemo.InputContainer = class {
     link.classList.add('mdl-button--colored');
 
     const icon = document.createElement('i');
-    icon.classList.add('material-icons-round');
+    icon.classList.add('material-icons');
     icon.textContent = 'help';
 
     link.appendChild(icon);

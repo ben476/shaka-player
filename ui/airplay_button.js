@@ -41,7 +41,7 @@ shaka.ui.AirPlayButton = class extends shaka.ui.Element {
 
     /** @private {!HTMLElement} */
     this.airplayIcon_ = shaka.util.Dom.createHTMLElement('i');
-    this.airplayIcon_.classList.add('material-icons-round');
+    this.airplayIcon_.classList.add('material-icons');
     this.airplayIcon_.textContent = shaka.ui.Enums.MaterialDesignIcons.AIRPLAY;
     this.airplayButton_.appendChild(this.airplayIcon_);
 
